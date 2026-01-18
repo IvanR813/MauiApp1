@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MauiApp1.ViewModels"
+             x:Class="MauiApp1.Views.CanteenView"
+             x:DataType="viewmodels:CanteenViewModel"
+             Title="Canteen Payment">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,40"
+            Spacing="20">
+            
+            <Label
+                Text="Canteen Payment"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,0,0,30" />
+            
+            <Label
+                Text="Enter amount to pay for canteen"
+                FontSize="16"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20" />
+            
+            <Entry
+                Text="{Binding Amount}"
+                Placeholder="Amount (RSD)"
+                Keyboard="Numeric"
+                HorizontalOptions="Fill" />
+            
+            <Button
+                Text="Pay"
+                Command="{Binding PayCommand}"
+                IsEnabled="{Binding PayCommand.CanExecute}"
+                HorizontalOptions="Fill"
+                Margin="0,20,0,0" />
+            
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
