@@ -12,7 +12,7 @@ namespace MauiApp1.Services
             {
                 Id = Guid.NewGuid(),
                 FullName = "Demo Student",
-                StudentNumber = studentNumber,
+                StudentNumber = "123",
                 Faculty = "Faculty of Engineering"
             };
             return _currentStudent;

@@ -11,6 +11,7 @@ namespace MauiApp1.Views
         public LoginView()
         {
             InitializeComponent();
+            
             BindingContext = new LoginViewModel();
         }
     }
