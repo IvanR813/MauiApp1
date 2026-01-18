@@ -21,6 +21,12 @@ namespace MauiApp1
             }
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateBalanceLabel();
+        }
+
         private void UpdateBalanceLabel()
         {
             if (BalanceLabel != null && _viewModel != null)
@@ -29,9 +35,12 @@ namespace MauiApp1
             }
         }
 
-        private void OnPaymentProcessed(object? sender, EventArgs e)
+        private async void OnPaymentProcessed(object? sender, EventArgs e)
         {
             UpdateBalanceLabel();
+            
+            // Navigate back to HomeView to refresh the balance there
+            await Shell.Current.GoToAsync("//HomeView");
         }
     }
 }

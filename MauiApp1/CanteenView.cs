@@ -1,13 +1,22 @@
+using MauiApp1.Models;
+using MauiApp1.Services;
+
 namespace MauiApp1
 {
     public class CanteenViewModel
     {
-        private decimal _cashBalance = 1000.00m; // Default balance, you can load this from storage
+        private readonly IWalletService _walletService;
+        private readonly ITransactionService _transactionService;
+
+        public CanteenViewModel()
+        {
+            _walletService = AppState.WalletService;
+            _transactionService = AppState.TransactionService;
+        }
 
         public decimal CashBalance
         {
-            get => _cashBalance;
-            set => _cashBalance = value;
+            get => _walletService.GetBalance();
         }
 
         public int BreakfastQuantity { get; set; } = 0;
@@ -34,14 +43,23 @@ namespace MauiApp1
                 return false; // No items selected
             }
 
-            if (total > CashBalance)
+            // Use wallet service to process payment
+            bool success = _walletService.Pay(total);
+
+            if (success)
             {
-                return false; // Insufficient balance
+                // Record transaction
+                var transaction = new Transaction
+                {
+                    Id = Guid.NewGuid(),
+                    Amount = -total,
+                    Date = DateTime.Now,
+                    Description = $"Canteen payment - Breakfast: {BreakfastQuantity}, Lunch: {LunchQuantity}, Dinner: {DinnerQuantity}"
+                };
+                _transactionService.AddTransaction(transaction);
             }
 
-            // Deduct from balance
-            CashBalance -= total;
-            return true;
+            return success;
         }
 
         public string GetBalanceString()

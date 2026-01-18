@@ -80,6 +80,8 @@ namespace MauiApp1
             _viewModel.LunchQuantity = lunchQty;
             _viewModel.DinnerQuantity = dinnerQty;
 
+            // Calculate total before processing payment
+            decimal total = _viewModel.CalculateTotal();
             bool success = _viewModel.ProcessPayment();
 
             if (success)
@@ -93,11 +95,11 @@ namespace MauiApp1
                 DinnerQuantityEntry.Text = "0";
                 UpdateTotal();
                 
-                // Notify parent that payment was processed
-                PaymentProcessed?.Invoke(this, EventArgs.Empty);
+                // Show success message with the total that was paid
+                Application.Current?.MainPage?.DisplayAlert("Success", $"Successfully paid {total:F2} RSD for canteen", "OK");
                 
-                // Show success message
-                Application.Current?.MainPage?.DisplayAlert("Success", "Payment processed successfully!", "OK");
+                // Notify parent that payment was processed (this will navigate to HomeView)
+                PaymentProcessed?.Invoke(this, EventArgs.Empty);
             }
             else
             {
