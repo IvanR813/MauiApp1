@@ -29,7 +29,7 @@ namespace MauiApp1.ViewModels
 
         public void RefreshBalance()
         {
-            Balance = _walletService.GetBalance();
+            Balance = AppState.WalletService.GetBalance();
         }
 
         public string StudentName
@@ -69,8 +69,8 @@ namespace MauiApp1.ViewModels
             }
             else
             {
-                StudentName = "Guest";
-                Faculty = "N/A";
+                StudentName = "Radoš deset Ivan nula";
+                Faculty = "FON organizacionih nauka";
             }
 
             Balance = _walletService.GetBalance();

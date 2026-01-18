@@ -11,16 +11,15 @@ namespace MauiApp1.ViewModels
 
         public CanteenViewModel()
         {
-            _walletService = AppState.WalletService;
+            _walletService = AppState.WalletService;       // globalni wallet
             _transactionService = AppState.TransactionService;
+
             PayCommand = new Command(OnPay, CanPay);
-            
+
             PropertyChanged += (_, e) =>
             {
                 if (e.PropertyName == nameof(Amount))
-                {
                     PayCommand.ChangeCanExecute();
-                }
             };
         }
 
@@ -34,9 +33,9 @@ namespace MauiApp1.ViewModels
 
         private bool CanPay()
         {
-            return !string.IsNullOrWhiteSpace(Amount) && 
-                   decimal.TryParse(Amount, out var amount) && 
-                   amount > 0 && 
+            return !string.IsNullOrWhiteSpace(Amount) &&
+                   decimal.TryParse(Amount, out var amount) &&
+                   amount > 0 &&
                    !IsBusy;
         }
 
@@ -53,25 +52,33 @@ namespace MauiApp1.ViewModels
             try
             {
                 var success = _walletService.Pay(amount);
-                
+
                 if (!success)
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "Insufficient balance", "OK");
                     return;
                 }
-                
-                var transaction = new Transaction
+
+                // dodaj transakciju
+                _transactionService.AddTransaction(new Transaction
                 {
                     Id = Guid.NewGuid(),
                     Amount = -amount,
                     Date = DateTime.Now,
                     Description = "Canteen payment"
-                };
-                _transactionService.AddTransaction(transaction);
-                
-                await Application.Current.MainPage.DisplayAlert("Success", $"Successfully paid {amount:F2} RSD for canteen", "OK");
+                });
+
                 Amount = string.Empty;
-                
+
+                // osveži HomeViewModel saldo
+                if (Application.Current.MainPage is Shell shell &&
+                    shell.CurrentPage.BindingContext is HomeViewModel homeVm)
+                {
+                    homeVm.RefreshBalance();
+                }
+
+                await Application.Current.MainPage.DisplayAlert("Success", $"Successfully paid {amount:F2} RSD for canteen", "OK");
+
                 await Shell.Current.GoToAsync("//HomeView");
             }
             finally
