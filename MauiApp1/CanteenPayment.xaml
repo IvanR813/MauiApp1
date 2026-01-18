@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.CanteenPayment">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <!-- Breakfast Row -->
+            <Border StrokeThickness="1" Padding="15" Stroke="{StaticResource Gray200}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Breakfast - 56.00 RSD" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Start"/>
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <!-- Left side buttons -->
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Button x:Name="BreakfastMinus10Btn" 
+                                    Text="-10" 
+                                    WidthRequest="60"
+                                    Clicked="OnBreakfastMinus10Clicked"/>
+                            <Button x:Name="BreakfastMinus1Btn" 
+                                    Text="-1" 
+                                    WidthRequest="60"
+                                    Clicked="OnBreakfastMinus1Clicked"/>
+                        </VerticalStackLayout>
+                        
+                        <!-- Textbox in middle -->
+                        <Entry x:Name="BreakfastQuantityEntry" 
+                               Grid.Column="1"
+                               Text="0"
+                               Keyboard="Numeric"
+                               HorizontalTextAlignment="Center"
+                               FontSize="18"/>
+                        
+                        <!-- Right side buttons -->
+                        <VerticalStackLayout Grid.Column="2" Spacing="5">
+                            <Button x:Name="BreakfastPlus1Btn" 
+                                    Text="+1" 
+                                    WidthRequest="60"
+                                    Clicked="OnBreakfastPlus1Clicked"/>
+                            <Button x:Name="BreakfastPlus10Btn" 
+                                    Text="+10" 
+                                    WidthRequest="60"
+                                    Clicked="OnBreakfastPlus10Clicked"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+            
+            <!-- Lunch Row -->
+            <Border StrokeThickness="1" Padding="15" Stroke="{StaticResource Gray200}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Lunch - 120.00 RSD" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Start"/>
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <!-- Left side buttons -->
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Button x:Name="LunchMinus10Btn" 
+                                    Text="-10" 
+                                    WidthRequest="60"
+                                    Clicked="OnLunchMinus10Clicked"/>
+                            <Button x:Name="LunchMinus1Btn" 
+                                    Text="-1" 
+                                    WidthRequest="60"
+                                    Clicked="OnLunchMinus1Clicked"/>
+                        </VerticalStackLayout>
+                        
+                        <!-- Textbox in middle -->
+                        <Entry x:Name="LunchQuantityEntry" 
+                               Grid.Column="1"
+                               Text="0"
+                               Keyboard="Numeric"
+                               HorizontalTextAlignment="Center"
+                               FontSize="18"/>
+                        
+                        <!-- Right side buttons -->
+                        <VerticalStackLayout Grid.Column="2" Spacing="5">
+                            <Button x:Name="LunchPlus1Btn" 
+                                    Text="+1" 
+                                    WidthRequest="60"
+                                    Clicked="OnLunchPlus1Clicked"/>
+                            <Button x:Name="LunchPlus10Btn" 
+                                    Text="+10" 
+                                    WidthRequest="60"
+                                    Clicked="OnLunchPlus10Clicked"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+            
+            <!-- Dinner Row -->
+            <Border StrokeThickness="1" Padding="15" Stroke="{StaticResource Gray200}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Dinner - 90.00 RSD" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Start"/>
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <!-- Left side buttons -->
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Button x:Name="DinnerMinus10Btn" 
+                                    Text="-10" 
+                                    WidthRequest="60"
+                                    Clicked="OnDinnerMinus10Clicked"/>
+                            <Button x:Name="DinnerMinus1Btn" 
+                                    Text="-1" 
+                                    WidthRequest="60"
+                                    Clicked="OnDinnerMinus1Clicked"/>
+                        </VerticalStackLayout>
+                        
+                        <!-- Textbox in middle -->
+                        <Entry x:Name="DinnerQuantityEntry" 
+                               Grid.Column="1"
+                               Text="0"
+                               Keyboard="Numeric"
+                               HorizontalTextAlignment="Center"
+                               FontSize="18"/>
+                        
+                        <!-- Right side buttons -->
+                        <VerticalStackLayout Grid.Column="2" Spacing="5">
+                            <Button x:Name="DinnerPlus1Btn" 
+                                    Text="+1" 
+                                    WidthRequest="60"
+                                    Clicked="OnDinnerPlus1Clicked"/>
+                            <Button x:Name="DinnerPlus10Btn" 
+                                    Text="+10" 
+                                    WidthRequest="60"
+                                    Clicked="OnDinnerPlus10Clicked"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+            
+            <!-- Total Amount Display -->
+            <Label x:Name="TotalAmountLabel" 
+                   Text="Total: 0.00 RSD" 
+                   FontSize="18" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,10,0,0"/>
+            
+            <!-- Error Message -->
+            <Label x:Name="ErrorMessageLabel" 
+                   Text="" 
+                   FontSize="14" 
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   IsVisible="False"/>
+            
+            <!-- Confirm Button -->
+            <Button x:Name="ConfirmButton" 
+                    Text="Confirm Transaction" 
+                    Clicked="OnConfirmClicked"
+                    Margin="0,10,0,0"
+                    HorizontalOptions="Fill"/>
+                    
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentView>
