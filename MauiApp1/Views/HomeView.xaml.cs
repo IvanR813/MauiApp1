@@ -9,5 +9,16 @@ namespace MauiApp1.Views
             InitializeComponent();
             BindingContext = new HomeViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext is HomeViewModel vm)
+            {
+                vm.RefreshBalance();
+            }
+        }
+
     }
 }

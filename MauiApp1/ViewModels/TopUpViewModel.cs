@@ -11,8 +11,8 @@ namespace MauiApp1.ViewModels
 
         public TopUpViewModel()
         {
-            _walletService = new MockWalletService();
-            _transactionService = new MockTransactionService();
+            _walletService = AppState.WalletService;
+            _transactionService = AppState.TransactionService;
             TopUpCommand = new Command(OnTopUp, CanTopUp);
             
             PropertyChanged += (_, e) =>

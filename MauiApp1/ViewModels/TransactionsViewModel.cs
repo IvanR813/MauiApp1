@@ -11,7 +11,7 @@ namespace MauiApp1.ViewModels
 
         public TransactionsViewModel()
         {
-            _transactionService = new MockTransactionService();
+            _transactionService = AppState.TransactionService;
             Transactions = new ObservableCollection<Transaction>();
             LoadTransactions();
         }

@@ -13,18 +13,23 @@ namespace MauiApp1.ViewModels
         public HomeViewModel()
         {
             _authService = new MockAuthService();
-            _walletService = new MockWalletService();
-            
+            _walletService = AppState.WalletService;
+
             LoadData();
             
-            GoToTopUpCommand = new Command(async () => await Shell.Current.GoToAsync("//TopUpView"));
-            GoToCanteenCommand = new Command(async () => await Shell.Current.GoToAsync("//CanteenView"));
-            GoToDormCommand = new Command(async () => await Shell.Current.GoToAsync("//DormPaymentView"));
-            GoToActivateCardCommand = new Command(async () => await Shell.Current.GoToAsync("//ActivateCardView"));
-            GoToImportCardCommand = new Command(async () => await Shell.Current.GoToAsync("//ImportCardView"));
-            GoToLaundryCommand = new Command(async () => await Shell.Current.GoToAsync("//LaundryView"));
-            GoToPartyCommand = new Command(async () => await Shell.Current.GoToAsync("//PartyView"));
-            GoToTransactionsCommand = new Command(async () => await Shell.Current.GoToAsync("//TransactionsView"));
+            GoToTopUpCommand = new Command(async () => await Shell.Current.GoToAsync("TopUpView"));
+            GoToCanteenCommand = new Command(async () => await Shell.Current.GoToAsync("CanteenView"));
+            GoToDormCommand = new Command(async () => await Shell.Current.GoToAsync("DormPaymentView"));
+            GoToActivateCardCommand = new Command(async () => await Shell.Current.GoToAsync("ActivateCardView"));
+            GoToImportCardCommand = new Command(async () => await Shell.Current.GoToAsync("ImportCardView"));
+            GoToLaundryCommand = new Command(async () => await Shell.Current.GoToAsync("LaundryView"));
+            GoToPartyCommand = new Command(async () => await Shell.Current.GoToAsync("PartyView"));
+            GoToTransactionsCommand = new Command(async () => await Shell.Current.GoToAsync("TransactionsView"));
+        }
+
+        public void RefreshBalance()
+        {
+            Balance = _walletService.GetBalance();
         }
 
         public string StudentName

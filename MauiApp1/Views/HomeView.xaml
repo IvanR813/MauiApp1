@@ -55,7 +55,7 @@
             
             <Button
                 Text="Top Up Wallet"
-                Clicked="{Binding GoToTopUpCommand}"
+                Command="{Binding GoToTopUpCommand}"
                 HorizontalOptions="Fill"
                 Margin="0,0,0,10" />
             

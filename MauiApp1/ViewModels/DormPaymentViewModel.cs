@@ -11,8 +11,8 @@ namespace MauiApp1.ViewModels
 
         public DormPaymentViewModel()
         {
-            _walletService = new MockWalletService();
-            _transactionService = new MockTransactionService();
+            _walletService = AppState.WalletService;
+            _transactionService = AppState.TransactionService;
             PayCommand = new Command(OnPay, CanPay);
             
             PropertyChanged += (_, e) =>

@@ -5,6 +5,13 @@
              x:Class="MauiApp1.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Jua"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontFamily" Value="Jua"/>
+            </Style>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
