@@ -33,6 +33,7 @@
             
             <Button
                 Text="Login"
+                Clicked="OnGoToPage2"
                 Command="{Binding LoginCommand}"
                 IsEnabled="{Binding LoginCommand.CanExecute}"
                 HorizontalOptions="Fill"
