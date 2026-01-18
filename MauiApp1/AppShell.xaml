@@ -12,4 +12,31 @@
         ContentTemplate="{DataTemplate views:LoginView}"
         Route="LoginView" />
 
+    <!-- HOME -->
+    <ShellContent
+        Route="HomeView"
+        ContentTemplate="{DataTemplate views:HomeView}" />
+
+    <!-- WALLET -->
+    <ShellContent
+        Route="TopUpView"
+        ContentTemplate="{DataTemplate views:TopUpView}" />
+
+    <ShellContent
+        Route="TransactionsView"
+        ContentTemplate="{DataTemplate views:TransactionsView}" />
+
+    <!-- PAYMENTS -->
+    <ShellContent
+        Route="CanteenView"
+        ContentTemplate="{DataTemplate views:CanteenView}" />
+
+    <ShellContent
+        Route="DormPaymentView"
+        ContentTemplate="{DataTemplate views:DormPaymentView}" />
+
+    <!-- OTHER FEATURES -->
+    <ShellContent
+        Route="PartyView"
+        ContentTemplate="{DataTemplate views:PartyView}" />
 </Shell>
